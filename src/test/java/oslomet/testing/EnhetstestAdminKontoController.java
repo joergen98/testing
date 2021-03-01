@@ -7,16 +7,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import oslomet.testing.API.AdminKontoController;
 import oslomet.testing.DAL.AdminRepository;
-import oslomet.testing.DAL.BankRepository;
 import oslomet.testing.Models.Konto;
-import oslomet.testing.Models.Transaksjon;
 import oslomet.testing.Sikkerhet.Sikkerhet;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -46,7 +41,7 @@ public class EnhetstestAdminKontoController {
         kontoList.add(kontoEn);
         kontoList.add(kontoTo);
 
-        when(sjekk.loggetInn()).thenReturn("105010123456");
+        when(sjekk.loggetInn()).thenReturn("Admin");
 
         when(repository.hentAlleKonti()).thenReturn(kontoList);
 
@@ -66,6 +61,98 @@ public class EnhetstestAdminKontoController {
 
         //assert
         assertNull(resultat);
+    }
+
+    @Test
+    public void registrerKonto_LoggetInn(){
+
+        //arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn("Admin");
+
+        when(repository.registrerKonto(kontoEn)).thenReturn("OK");
+
+        String resultat = adminKontoController.registrerKonto(kontoEn);
+
+        //Assert
+        assertEquals("OK", resultat);
+
+    }
+
+    @Test
+    public void registrerKonto_IkkeLoggetInn(){
+        //Arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        String resultat = adminKontoController.registrerKonto(kontoEn);
+
+        //Assert
+        assertEquals("Ikke innlogget", resultat);
+
+    }
+
+    @Test
+    public void endreKonto_LoggetInn(){
+        //Arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn("Admin");
+
+        when(repository.endreKonto(kontoEn)).thenReturn("OK");
+
+        //act
+        String resultat = adminKontoController.endreKonto(kontoEn);
+
+        //Assert
+        assertEquals("OK", resultat);
+    }
+
+    @Test
+    public void endreKonto_IkkeLoggetInn(){
+        //Arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        String resultat = adminKontoController.endreKonto(kontoEn);
+
+        //Assert
+        assertEquals("Ikke innlogget", resultat);
+    }
+
+    @Test
+    public void slettKonto_LoggetInn(){
+        //Arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn("Admin");
+
+        when(repository.slettKonto(kontoEn.getKontonummer())).thenReturn("OK");
+
+        //Act
+        String resultat = adminKontoController.slettKonto(kontoEn.getKontonummer());
+
+        //Assert
+        assertEquals("OK", resultat);
+    }
+
+    @Test
+    public void slettKonto_IkkeLoggetInn(){
+        //Arrange
+        Konto kontoEn = new Konto("01010110523","105010123456",1000,"Lønnskonto","Nok", null );
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //Act
+        String resultat = adminKontoController.slettKonto(kontoEn.getKontonummer());
+
+        //Assert
+        assertEquals("Ikke innlogget", resultat);
     }
 }
 
