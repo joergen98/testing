@@ -18,6 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EnhetstestAdminKontoController {
@@ -53,6 +54,18 @@ public class EnhetstestAdminKontoController {
         List<Konto> resultat = adminKontoController.hentAlleKonti();
 
         assertEquals(kontoList, resultat);
+    }
+
+    @Test
+    public void hentAlleKonti_IkkeLoggetInn(){
+        //arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        List<Konto> resultat = adminKontoController.hentAlleKonti();
+
+        //assert
+        assertNull(resultat);
     }
 }
 
