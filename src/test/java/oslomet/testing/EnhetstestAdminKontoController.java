@@ -51,7 +51,6 @@ public class EnhetstestAdminKontoController {
         assertEquals(kontoList, resultat);
     }
 
-
     @Test
     public void hentAlleKonti_IkkeLoggetInn(){
         //arrange
@@ -155,7 +154,5 @@ public class EnhetstestAdminKontoController {
         //Assert
         assertEquals("Ikke innlogget", resultat);
     }
-
-
 }
 

@@ -78,7 +78,7 @@ public class EnhetstestAdminKundeController {
 
 
     @Test
-    public void HentAlleKunder_LoggetInn(){
+    public void hentAlleKunder_LoggetInn(){
 
         //arrange
         List<Kunde> kundelist = new ArrayList<>();
@@ -100,7 +100,7 @@ public class EnhetstestAdminKundeController {
     }
 
     @Test
-    public void HentAlleKunder_IkkeLoggetInn() {
+    public void hentAlleKunder_IkkeLoggetInn() {
 
         //arrange
         when(sjekk.loggetInn()).thenReturn(null);
@@ -113,7 +113,7 @@ public class EnhetstestAdminKundeController {
     }
 
     @Test
-    public void EndreKundeInfo_LoggetInn(){
+    public void endreKundeInfo_LoggetInn(){
 
         //arrange
         Kunde KundeEn = new Kunde("01010110523", "Lene", "Jensen", "Askerveien 22", "3270", "Asker", "22224444", "HeiHei");
@@ -130,7 +130,7 @@ public class EnhetstestAdminKundeController {
     }
 
     @Test
-    public void EndreKundeInfo_IkkeLoggetInn(){
+    public void endreKundeInfo_IkkeLoggetInn(){
 
         //arrange
         Kunde KundeEn = new Kunde("01010110523", "Lene", "Jensen", "Askerveien 22", "3270", "Asker", "22224444", "HeiHei");
