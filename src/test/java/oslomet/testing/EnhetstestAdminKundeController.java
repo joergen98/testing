@@ -44,12 +44,14 @@ public class EnhetstestAdminKundeController {
     @Test
     public void lagrekunde_ikkeLoggetInn(){
         Kunde enKunde = new Kunde( "21010110523", "Kene", "Lensen", "Akerveien 22", "3280", "Oslo", "34556654", "okei");
-        when(sjekk.loggetInn()).thenReturn("Ikke logget inn");
+        //when(sjekk.loggetInn()).thenReturn("Ikke logget inn");
 
-        when(repository.registrerKunde(enKunde)).thenReturn("OK");
+        when(sjekk.loggetInn()).thenReturn(null);
+
+       // when(repository.registrerKunde(enKunde)).thenReturn("OK");
         String resultat = adminKundeController.lagreKunde(enKunde);
 
-        assertEquals("OK",resultat);
+        assertEquals("Ikke logget inn", resultat);
     }
 
     @Test
@@ -67,12 +69,13 @@ public class EnhetstestAdminKundeController {
     @Test
     public void slettKunde_ikkeLoggetInn(){
         Kunde enKunde = new Kunde( "21010110523", "Kene", "Lensen", "Akerveien 22", "3280", "Oslo", "34556654", "okei");
-        when(sjekk.loggetInn()).thenReturn("Ikke logget inn");
+        //when(sjekk.loggetInn()).thenReturn("Ikke logget inn");
+        when(sjekk.loggetInn()).thenReturn(null);
 
-        when(repository.slettKunde(enKunde.getPersonnummer())).thenReturn("OK");
+        //when(repository.slettKunde(enKunde.getPersonnummer())).thenReturn("OK");
         String resultat = adminKundeController.slett(enKunde.getPersonnummer());
 
-        assertEquals("OK", resultat);
+        assertEquals("Ikke logget inn", resultat);
 
     }
 
